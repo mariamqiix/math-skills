@@ -18,8 +18,7 @@ func main() {
 	fmt.Print("the Median : ")
 	fmt.Println(math.Round(Median(x)))
 	fmt.Print("the Variance : ")
-	fmt.Print(int(math.Round(Variance(x))))
-	fmt.Println()
+	fmt.Println(int(math.Round(Variance(x))))
 	fmt.Print("the Standard Deviation : ")
 	fmt.Println(math.Round(StandardDeviation(x)))
 } else {
