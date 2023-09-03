@@ -11,12 +11,14 @@ import (
 )
 
 func main() {
-	if !ifItsNo("numbers.txt") {
-		fmt.Print("the file contains a text")
-		return
-	}
-	fmt.Println(ReadFile("numbers.txt"))
-	x := ReadFile("numbers.txt")
+	if len(os.Args) == 2 {
+	fileName := os.Args[1] 
+	// if !ifItsNo(fileName) {
+	// 	fmt.Print("the file contains a text")
+	// 	return
+	// }
+	// fmt.Println(ReadFile(fileName))
+	x := ReadFile(fileName)
 	fmt.Print("the Average : ")
 	fmt.Println(math.Round(ava(x)))
 	fmt.Print("the Median : ")
@@ -25,10 +27,16 @@ func main() {
 	fmt.Println(math.Round(Variance(x)))
 	fmt.Print("the Standard Deviation : ")
 	fmt.Println(math.Round(StandardDeviation(x)))
+} else {
+	fmt.Println("you should write \ngo run . FileName")
+}
 }
 
 func ReadFile(fileName string) []int {
-	ReadFile, _ := os.Open(fileName)
+	ReadFile, error := os.Open(fileName)
+	if error != (nil) {
+		printError(error)
+	}
 	FileScanner := bufio.NewScanner(ReadFile)
 	var numbers []int
 	for FileScanner.Scan() {
@@ -41,7 +49,10 @@ func ReadFile(fileName string) []int {
 }
 
 func ifItsNo(text string) bool {
-	ReadFile, _ := os.Open(text)
+	ReadFile, error := os.Open(text) 
+	if error != (nil) {
+		printError(error)
+		}
 	FileScanner := bufio.NewScanner(ReadFile)
 	for FileScanner.Scan() {
 		x := FileScanner.Text()
@@ -88,4 +99,9 @@ func Variance(i []int) float64 {
 func StandardDeviation(i []int) float64 {
 	x := Variance(i)
 	return (math.Sqrt(x))
+}
+
+func printError(err error) {
+	fmt.Println("ERROR: " + err.Error())
+	os.Exit(1)
 }
