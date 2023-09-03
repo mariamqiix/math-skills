@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	// "strings"
 	"math"
 	"sort"
 	"strconv"
@@ -13,11 +12,6 @@ import (
 func main() {
 	if len(os.Args) == 2 {
 	fileName := os.Args[1] 
-	// if !ifItsNo(fileName) {
-	// 	fmt.Print("the file contains a text")
-	// 	return
-	// }
-	// fmt.Println(ReadFile(fileName))
 	x := ReadFile(fileName)
 	fmt.Print("the Average : ")
 	fmt.Println(math.Round(ava(x)))
@@ -47,24 +41,6 @@ func ReadFile(fileName string) []int {
 	}
 	ReadFile.Close()
 	return numbers
-}
-
-func ifItsNo(text string) bool {
-	ReadFile, error := os.Open(text) 
-	if error != (nil) {
-		printError(error)
-		}
-	FileScanner := bufio.NewScanner(ReadFile)
-	for FileScanner.Scan() {
-		x := FileScanner.Text()
-		for _, c := range x {
-			if c < '0' || c > '9' {
-				return false
-			}
-		}
-	}
-	ReadFile.Close()
-	return true
 }
 
 func ava(i []int) float64 {
