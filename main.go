@@ -24,7 +24,8 @@ func main() {
 	fmt.Print("the Median : ")
 	fmt.Println(math.Round(Median(x)))
 	fmt.Print("the Variance : ")
-	fmt.Println(math.Round(Variance(x)))
+	fmt.Print(int(math.Round(Variance(x))))
+	fmt.Println()
 	fmt.Print("the Standard Deviation : ")
 	fmt.Println(math.Round(StandardDeviation(x)))
 } else {
@@ -86,14 +87,14 @@ func Median(i []int) float64 {
 }
 
 func Variance(i []int) float64 {
-	DeltaX := Median(i)
+	DeltaX := ava(i)
 	TheX := 0.0
 	for x := 0; x < len(i); x++ {
-		z := float64(i[x]) - float64(DeltaX)
+		z := (float64(i[x]) - float64(DeltaX))
 		TheX += (z * z)
 	}
-	TheX /= (float64(len(i)))
-	return TheX
+	Variance := TheX/(float64(len(i)))
+	return Variance
 }
 
 func StandardDeviation(i []int) float64 {
